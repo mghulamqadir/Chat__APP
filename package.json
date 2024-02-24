@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon dotenv/config Backend/server.js"
+    "start": "nodemon Backend/server.js"
   },
   "keywords": [],
   "author": "",
