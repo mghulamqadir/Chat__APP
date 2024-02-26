@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background: radial-gradient(rgba(0, 0, 0, 0.205), rgba(0, 0, 0, 0.068)), url('/bg.png');
+    background-repeat:no-repeat ;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+::-webkit-scrollbar{
+    width: 4px;
+    opacity: 0.1;
+}
+::-webkit-scrollbar-track{
+    background: #555;
+    opacity: 0.1;
+}
+::-webkit-scrollbar-thumb{
+    background: #121212;
+    border-radius: 8px;
+    opacity: 0.1;
+}
+::-webkit-scrollbar-thumb:hover{
+    opacity: 0.1;
+    background: #242424;
+}
