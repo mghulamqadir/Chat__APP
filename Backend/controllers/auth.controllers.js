@@ -63,7 +63,7 @@ const login = async (req, res) => {
                 return res.status(400).json({ error: "Invalid username" });
 
             case !isPasswordCorrect:
-                return res.status(400).json({ error: "Invalid password" });
+                return res.status(400).json({ error: "Wrong Password" });
 
             default:
 

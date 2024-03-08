@@ -1,8 +1,10 @@
 import { useState } from "react"
 import toast from "react-hot-toast"
+import { useAuthContext } from "../context/AuthContext"
 
 const useSignup = () => {
     const [loading, setLoading] = useState(false)
+    const { setAuthUser } = useAuthContext()
 
     const signup = async ({ fullName, username, password, confirmPassword, gender }) => {
         const success = handleInputError({ fullName, username, password, confirmPassword, gender })
@@ -26,15 +28,20 @@ const useSignup = () => {
                 }),
             });
 
+            const data = await res.json();
             if (res.ok) {
-                const data = await res.json();
-                if (data.error == "duplicate User") {
+                if (data.error === "duplicate User") {
                     toast.error("duplicate error");
                 }
+
             } else {
                 const errorData = await res.json();
                 throw new Error(errorData.message);
             }
+            // localStorage
+            localStorage.setItem("Chat-User", JSON.stringify(data))
+            setAuthUser(data)
+
         } catch (error) {
             toast.error(error.message);
         } finally {
@@ -50,9 +57,17 @@ const useSignup = () => {
 
 export default useSignup
 
-async function handleInputError({ fullName, username, password, confirmPassword, gender }) {
-    if (!fullName || !username || !password || !confirmPassword || !gender) {
-        toast.error('Please Fill the All Fields')
+function handleInputError({ fullName, username, password, confirmPassword, gender }) {
+    if (!fullName.trim()) {
+        toast.error('Enter the Full name')
+        return false
+    }
+    if (!username) {
+        toast.error('Please Enter the valid Username')
+        return false
+    }
+    if (!gender) {
+        toast.error('Check the Gender')
         return false
     }
 
